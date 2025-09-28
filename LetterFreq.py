@@ -23,7 +23,7 @@ parser.add_argument(
 parser.add_argument(
     "--graph", action="store_true", help="Display a bar chart of letter frequencies using matplotlib")
 parser.add_argument(
-    "--GeneralStats", action="store_true", help="Show general statistics (lines, words, etc.) about the book")
+    "--generalstats", action="store_true", help="Show general statistics (lines, words, etc.) about the book")
 args = parser.parse_args()
 book = args.onlybook
 with open(args.file, "r", encoding="utf-8") as file:
@@ -38,21 +38,21 @@ with open(args.file, "r", encoding="utf-8") as file:
             inBook = True 
         if not char:
             break
-        if(args.GeneralStats):
-            if char == "\n":
-                nLines = nLines + 1
-            if char == " ":
-                nWords=nWords + 1
-        if not char.isalpha() or not char.isascii():
-            continue
         if inBook:
+            if(args.generalstats):
+                if char == "\n":
+                    nLines = nLines + 1
+                if char == " ":
+                    nWords=nWords + 1
+            if not char.isalpha() or not char.isascii():
+                continue
             total_letters = total_letters+1
             char = char.lower()
             letters[char] = letters[char] + 1
 relative_letters = {k: v / total_letters for k, v in letters.items()}
 end_time = time.time()
 print(f"Total elapsed time: {end_time - start_time:.4f} seconds")
-if args.GeneralStats:
+if args.generalstats:
     print("Number of lines: ", nLines)
     print("Number of words: ", nWords)
     print("Number of letters: ", total_letters)
