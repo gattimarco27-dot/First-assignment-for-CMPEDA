@@ -8,15 +8,11 @@ letters = {"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0,"h":0,"i":0,"j":0,"k":0,"l"
 inBook = False
 nLines = 0
 nWords = 0
-def valid_path(path):
-    if not os.path.exists(path):
-        raise argparse.ArgumentTypeError(f"Path '{path}' does not exist.")
-    return path
 
 parser = argparse.ArgumentParser(description="Analyze letter frequencies and statistics in a text file.")
 start_time = time.time()
 parser.add_argument(
-    "--file", type=valid_path, help="Path to the text file to analyze", required=True)
+    "--file", help="Path to the text file to analyze", required=True)
 parser.add_argument(
     "--onlybook", action="store_true", help="Analyze only the main book content (ignore preface, appendix, etc.)")
 parser.add_argument(
