@@ -49,6 +49,9 @@ with open(args.file, "r", encoding="utf-8") as file:
 relative_letters = {k: v / total_letters for k, v in letters.items()}
 end_time = time.time()
 print(f"Total elapsed time: {end_time - start_time:.4f} seconds")
+print("Letter frequencies (relative):")
+for letter, freq in relative_letters.items():
+    print(f"{letter}: {freq:.4f}")
 if args.generalstats:
     print("Number of lines: ", nLines)
     print("Number of words: ", nWords)
